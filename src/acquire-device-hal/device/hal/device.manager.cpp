@@ -119,6 +119,7 @@ DeviceManagerV0::init(void (*reporter)(int is_error,
     drivers_.push_back(driver_load("acquire-driver-hdcam", reporter));
     drivers_.push_back(driver_load("acquire-driver-zarr", reporter));
     drivers_.push_back(driver_load("acquire-driver-egrabber", reporter));
+    drivers_.push_back(driver_load("acquire-driver-spinnaker", reporter));
 
     // enumerate devices
     const DeviceIdentifier dflt{ 0, 0, DeviceKind_Unknown, "" };
