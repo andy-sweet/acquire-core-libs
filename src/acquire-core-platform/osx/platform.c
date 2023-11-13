@@ -45,10 +45,12 @@ int
 file_create(struct file* file, const char* filename, size_t bytesof_filename)
 {
     file->fid = open(filename, O_RDWR | O_CREAT | O_EXLOCK | O_NONBLOCK, 0666);
-    if (file->fid < 0)
+    if (file->fid < 0) {
         CHECK_POSIX(errno);
+    }
     return 1;
 Error:
+    LOGE("Failed to create \"%s\"", filename);
     return 0;
 }
 
