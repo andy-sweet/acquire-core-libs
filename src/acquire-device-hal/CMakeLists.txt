@@ -4,6 +4,8 @@ add_library(${tgt} STATIC
         device/hal/camera.c
         device/hal/driver.h
         device/hal/driver.c
+        device/hal/filter.h
+        device/hal/filter.c
         device/hal/device.manager.h
         device/hal/device.manager.cpp
         device/hal/loader.h

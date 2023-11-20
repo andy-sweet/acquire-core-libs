@@ -32,6 +32,7 @@ extern "C"
         DeviceKind_Storage,
         DeviceKind_StageAxis,
         DeviceKind_Signals,
+        DeviceKind_Filter,
         DeviceKind_Count,
         DeviceKind_Unknown
     };

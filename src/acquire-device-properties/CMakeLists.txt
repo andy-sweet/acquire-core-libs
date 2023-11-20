@@ -14,6 +14,7 @@ target_sources(${tgt} PUBLIC FILE_SET HEADERS
         device/props/experimental/stage.axis.h
         device/props/metadata.h
         device/props/storage.h
+        device/props/filter.h
 )
 target_include_directories(${tgt} PUBLIC "${CMAKE_CURRENT_LIST_DIR}")
 target_link_libraries(${tgt} PRIVATE
