@@ -20,6 +20,10 @@ extern "C"
     enum DeviceStatusCode filter_get(const struct Filter* filter,
                                      struct FilterProperties* settings);
 
+    enum DeviceStatusCode filter_accumulate(const struct Filter*,
+                                        struct VideoFrame* accumulator,
+                                        const struct VideoFrame* in);
+
     enum DeviceState filter_get_state(const struct Filter* filter);
 
 #ifdef __cplusplus

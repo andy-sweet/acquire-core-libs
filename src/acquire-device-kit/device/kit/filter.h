@@ -8,17 +8,25 @@
 extern "C"
 {
 #endif
+    struct VideoFrame;
 
     struct Filter
     {
         struct Device device;
         enum DeviceState state;
 
-        enum DeviceStatusCode (*set)(struct Filter*,
-                                     struct FilterProperties* settings);
+        enum DeviceState (*set)(struct Filter*,
+                                const struct FilterProperties* settings);
 
-        enum DeviceStatusCode (*get)(const struct Filter*,
-                                     struct FilterProperties* settings);
+        enum DeviceState (*get)(const struct Filter*,
+                                struct FilterProperties* settings);
+
+        enum DeviceState (*accumulate)(const struct Filter*,
+                                        struct VideoFrame* accumulator,
+                                        const struct VideoFrame* in);
+    
+        // TODO: unsure how this will get called by looking at storage.
+        //void (*destroy)(struct Filter* self);
     };
 
 #ifdef __cplusplus

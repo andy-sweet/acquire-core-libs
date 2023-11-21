@@ -30,6 +30,7 @@ device_kind_as_string(enum DeviceKind kind)
         XXX(Storage),
         XXX(StageAxis),
         XXX(Signals),
+        XXX(Filter),
 #undef XXX
     };
     // clang-format on

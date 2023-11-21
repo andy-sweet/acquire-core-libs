@@ -64,20 +64,15 @@ Error:;
 enum DeviceStatusCode
 filter_set(struct Filter* self, struct FilterProperties* settings)
 {
-    enum DeviceStatusCode ecode;
     // Neither can be NULL
     CHECK(self);
     CHECK(settings);
-    switch (ecode = self->set(self, settings)) {
-        case Device_Ok:
-            if (self->state != DeviceState_Running)
-                self->state = DeviceState_Armed;
-            break;
-        case Device_Err:
-            self->state = DeviceState_AwaitingConfiguration;
-            break;
-    }
-    return ecode;
+    // TODO: confusing translation of state and status code, should rethink this
+    // for filters. Do the existing states make much sense there, do we need others?
+    self->state = self->set(self, settings);
+    if (self->state == DeviceState_AwaitingConfiguration)
+        return Device_Err;
+    return Device_Ok;
 Error:
     return Device_Err;
 }
@@ -88,7 +83,18 @@ filter_get(const struct Filter* self, struct FilterProperties* settings)
     // Neither can be NULL
     CHECK(self);
     CHECK(settings);
-    return self->get(self, settings);
+    self->get(self, settings);
+    return Device_Ok;
+Error:
+    return Device_Err;
+}
+
+enum DeviceStatusCode
+filter_accumulate(const struct Filter* self, struct VideoFrame* accumulator, const struct VideoFrame* in)
+{
+    CHECK(self);
+    self->accumulate(self, accumulator, in);
+    return Device_Ok;
 Error:
     return Device_Err;
 }
